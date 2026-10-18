@@ -1,0 +1,16 @@
+START
+1. Node.js installieren, dann im Ordner: npm install
+2. ".env.example" nach ".env" kopieren und ausfüllen (Stripe-Key, Admin-Passwort)
+3. npm start  ->  http://localhost:3000
+
+PRODUKTE
+Ordner-Struktur:  products/<Spiel>/<Produktname>/  (darin deine Dateien)
+Der Ordnername ist der Name im Shop. Den Preis trägst du in products/prices.txt ein.
+Optional: info.txt im Produktordner = Beschreibung.
+Oder bequem im Browser: http://localhost:3000/admin.html (nur mit deinem Passwort)
+
+ZAHLUNG
+Stripe Checkout. Welche Methoden erscheinen (Karte, SEPA, Klarna, PayPal, Apple/Google Pay),
+stellst du im Stripe-Dashboard unter Einstellungen > Zahlungsmethoden ein.
+WICHTIG: Prüfe die Stripe-Nutzungsbedingungen für dein Angebot. Zahlungsanbieter dürfen Konten
+bei nicht erlaubten Geschäftsmodellen einfrieren.

@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bestellung</title>
+<style>body{margin:0;background:#07060d;color:#ece9fa;font:16px Manrope,system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}
+.box{background:#100e1c;border:1px solid #26213d;border-radius:16px;padding:28px;width:min(520px,92vw)}a{color:#22d3ee;display:block;padding:8px 0}h1{margin-top:0}</style></head><body>
+<div class="box"><h1>Danke für deine Bestellung</h1><div id="o">Lade deine Downloads …</div><a href="/">Zurück zum Shop</a></div>
+<script>
+fetch('/api/order?s='+encodeURIComponent(new URLSearchParams(location.search).get('s'))).then(r=>r.json()).then(d=>{
+const o=document.getElementById('o');if(d.error){o.textContent=d.error;return}
+o.innerHTML='';d.forEach(x=>{const a=document.createElement('a');a.href=x.url;a.textContent=x.product+' – '+x.file;o.append(a)})});
+</script></body></html>

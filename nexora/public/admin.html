@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin</title>
+<style>body{margin:0;background:#07060d;color:#ece9fa;font:16px Manrope,system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}
+form,.box{background:#100e1c;border:1px solid #26213d;border-radius:16px;padding:28px;width:min(440px,92vw);display:grid;gap:12px}
+input,textarea,button{font:inherit;padding:12px;border-radius:10px;border:1px solid #26213d;background:#07060d;color:inherit}
+button{background:#8b5cf6;border:0;font-weight:700;cursor:pointer}h1{margin:0 0 6px;font-size:20px}#m{color:#22d3ee;min-height:1.2em}</style></head><body>
+<form id="login"><h1>Admin-Login</h1><input id="pw" type="password" placeholder="Passwort" autocomplete="current-password"><button>Anmelden</button><div id="m1"></div></form>
+<form id="up" hidden><h1>Produkt hinzufügen</h1>
+<input name="game" placeholder="Spiel (z. B. Roblox)" required><input name="name" placeholder="Produktname" required>
+<input name="price" placeholder="Preis in € (z. B. 9.99)" required><textarea name="description" placeholder="Beschreibung" rows="3"></textarea>
+<input name="files" type="file" multiple required><button>Hochladen</button><div id="m"></div></form>
+<script>
+const $=s=>document.querySelector(s);
+async function check(){const r=await fetch('/admin/check');if(r.ok){$('#login').hidden=true;$('#up').hidden=false}}
+$('#login').onsubmit=async e=>{e.preventDefault();const r=await fetch('/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#pw').value})});r.ok?check():$('#m1').textContent='Falsches Passwort'};
+$('#up').onsubmit=async e=>{e.preventDefault();$('#m').textContent='Lade hoch …';const r=await fetch('/admin/upload',{method:'POST',body:new FormData(e.target)});$('#m').textContent=r.ok?'Gespeichert. Das Produkt ist jetzt im Shop.':'Fehler beim Hochladen';if(r.ok)e.target.reset()};
+check();
+</script></body></html>

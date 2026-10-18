@@ -1,0 +1,3 @@
+# Preise in Euro. Format: Spiel/Produktname = Preis
+# Ein Produkt erscheint im Shop nur, wenn hier ein Preis steht UND der Ordner existiert.
+# Beispiel: Roblox/Mein Produkt = 9.99

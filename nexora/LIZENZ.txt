@@ -1,0 +1,2 @@
+Dieses Projekt steht unter der LZS / ItsLivex License v2.0:
+https://github.com/ItsLivex/ItsLivex-Officially-LICENSE/blob/main/LICENSE.md

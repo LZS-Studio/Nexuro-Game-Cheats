@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXORA – Game Shop</title>
+<!-- Lizenz: LZS / ItsLivex License v2.0 – https://github.com/ItsLivex/ItsLivex-Officially-LICENSE/blob/main/LICENSE.md -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07060d;--panel:#100e1c;--line:#26213d;--text:#ece9fa;--mute:#9a94b8;--a:#8b5cf6;--b:#22d3ee;--ok:#34d399;--warn:#fbbf24;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Manrope,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:Unbounded,Manrope,sans-serif;margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--b);outline-offset:3px}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:24px;padding:14px 5vw;background:rgba(7,6,13,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-size:18px;font-weight:700;background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav .links{display:flex;gap:22px;margin-left:auto;color:var(--mute);font-weight:600;font-size:14px}
+nav .links a:hover{color:var(--text)}
+.cartbtn{border:1px solid var(--line);background:var(--panel);padding:8px 16px;border-radius:10px;font-weight:700;font-size:14px}
+.cartbtn b{background:var(--a);border-radius:99px;padding:1px 8px;margin-left:6px}
+.hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center;padding:80px 5vw;overflow:hidden}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+.hero .in{position:relative;max-width:860px}
+.hero h1{font-size:clamp(34px,7vw,76px);line-height:1.05;font-weight:700}
+.hero h1 span{display:inline-block;opacity:0;transform:translateY(40px) rotateX(-60deg);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+.hero p{color:var(--mute);font-size:18px;max-width:560px;margin:22px auto 34px;opacity:0;animation:fade 1s .9s forwards}
+.cta{display:inline-flex;gap:12px;opacity:0;animation:fade 1s 1.15s forwards}
+.btn{border:0;padding:14px 26px;border-radius:12px;font-weight:700;background:linear-gradient(120deg,var(--a),#6d28d9);box-shadow:0 0 32px rgba(139,92,246,.45);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 46px rgba(139,92,246,.7)}
+.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+.stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:30px 5vw;border-block:1px solid var(--line);background:var(--panel)}
+.stats div{text-align:center}.stats strong{font:700 26px Unbounded,sans-serif;color:var(--b)}.stats small{display:block;color:var(--mute)}
+section{padding:80px 5vw;max-width:1280px;margin:auto}
+section>h2{font-size:clamp(26px,4vw,40px);margin-bottom:8px}
+section>p.sub{color:var(--mute);margin:0 0 32px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.tab{border:1px solid var(--line);background:var(--panel);padding:10px 20px;border-radius:99px;font-weight:700;font-size:14px;color:var(--mute);transition:.2s}
+.tab:hover{color:var(--text)}
+.tab[aria-selected=true]{background:linear-gradient(120deg,var(--a),var(--b));color:#07060d;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;animation:pop .45s cubic-bezier(.2,.8,.2,1) backwards;transition:border-color .25s,transform .25s}
+.card::before{content:"";position:absolute;inset:-1px;border-radius:16px;padding:1px;background:linear-gradient(135deg,var(--a),transparent 40%,var(--b));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{transform:translateY(-4px)}.card:hover::before{opacity:1}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.card h3{font-size:16px}
+.card .game{font-size:13px;color:var(--mute)}
+.card ul{margin:0;padding-left:18px;color:var(--mute);font-size:14px;flex:1}
+.badge{align-self:flex-start;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;display:inline-flex;gap:6px;align-items:center;background:rgba(52,211,153,.12);color:var(--ok)}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite}
+.badge.upd{background:rgba(251,191,36,.12);color:var(--warn)}
+@keyframes pulse{50%{opacity:.25}}
+.price{display:flex;align-items:center;justify-content:space-between}
+.price b{font:700 20px Unbounded,sans-serif}
+.price button{border:1px solid var(--a);background:rgba(139,92,246,.15);padding:8px 16px;border-radius:10px;font-weight:700;font-size:14px;transition:.2s}
+.price button:hover{background:var(--a)}
+[hidden]{display:none!important}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tools input,.tools select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font:inherit}
+.tools input{flex:1;min-width:200px}
+.emptyshop{color:var(--mute);padding:30px 0}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.feat div{border-left:2px solid var(--a);padding:4px 0 4px 18px}
+.feat h3{font-size:16px;margin-bottom:6px}.feat p{margin:0;color:var(--mute);font-size:15px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--b);font-size:20px;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--mute);margin:10px 0 0;max-width:70ch}
+footer{border-top:1px solid var(--line);padding:40px 5vw;color:var(--mute);font-size:14px;text-align:center}
+footer p{max-width:720px;margin:10px auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:40;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.drawer.open{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.drawer h2{font-size:18px}
+#items{flex:1;overflow:auto}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row button{background:none;border:0;color:var(--mute)}
+.empty{color:var(--mute);padding:30px 0}
+.total{display:flex;justify-content:space-between;font-weight:700;font-size:18px;margin:16px 0}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--text);color:#07060d;padding:12px 20px;border-radius:12px;font-weight:700;z-index:50;transition:transform .35s;max-width:90%}
+.toast.show{transform:translate(-50%,0)}
+@media(max-width:700px){nav .links{display:none}nav{gap:0}.cartbtn{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#top">NEXORA</a>
+  <div class="links"><a href="#shop">Shop</a><a href="#why">Vorteile</a><a href="#faq">FAQ</a></div>
+  <button class="cartbtn" id="openCart" aria-label="Warenkorb öffnen">Warenkorb<b id="count">0</b></button>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="in">
+    <h1 id="h1">Spiele auf einem anderen Level.</h1>
+    <p>Sofort verfügbar für Fortnite, Minecraft, Roblox und mehr. Bezahlen, Key erhalten, loslegen.</p>
+    <div class="cta"><a class="btn" href="#shop">Zum Shop</a><a class="btn ghost" href="#faq">Häufige Fragen</a><a class="btn ghost" id="dc" href="#" target="_blank" rel="noopener" hidden>Discord</a></div>
+  </div>
+</header>
+
+<section id="shop">
+  <h2>Produkte</h2>
+  <p class="sub">Wähle ein Spiel und sieh dir alle verfügbaren Produkte an.</p>
+  <div class="tools"><input id="q" type="search" placeholder="Produkt suchen" aria-label="Produkt suchen"><select id="sort" aria-label="Sortieren"><option value="neu">Standard</option><option value="auf">Preis aufsteigend</option><option value="ab">Preis absteigend</option></select></div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="why">
+  <h2>Warum NEXORA</h2><p class="sub"></p>
+  <div class="feat">
+    <div><h3>Sofortige Lieferung</h3><p>Der Key erscheint direkt nach der Zahlung.</p></div>
+    <div><h3>Live-Statusanzeige</h3><p>Du siehst bei jedem Produkt, ob es aktuell läuft oder gerade aktualisiert wird.</p></div>
+    <div><h3>Persönlicher Support</h3><p>Hilfe bei Installation und Problemen per Ticket oder Discord.</p></div>
+    <div><h3>Regelmäßige Updates</h3><p>Produkte werden nach Spiel-Patches angepasst.</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2><p class="sub"></p>
+  <details><summary>Wie bekomme ich mein Produkt?</summary><p>Nach der Zahlung erhältst du deinen Key per E-Mail und in deinem Konto.</p></details>
+  <details><summary>Welche Zahlungsmethoden gibt es?</summary><p>Das hängt vom angebundenen Zahlungsanbieter ab. Trage hier deine Methoden ein.</p></details>
+  <details><summary>Was passiert bei einem Update?</summary><p>Der Status des Produkts wechselt auf „Update“, bis es wieder freigegeben ist.</p></details>
+  <details><summary>Gibt es eine Rückerstattung?</summary><p>Lege hier deine Rückerstattungsregeln fest und verlinke sie.</p></details>
+</section>
+
+<footer>
+  <div class="logo">NEXORA</div>
+  <p>Die Nutzung von Cheats kann gegen die Nutzungsbedingungen der Spiele verstoßen und zu Account-Sperren führen. Käufer nutzen die Produkte auf eigenes Risiko.</p>
+  <p>Impressum · Datenschutz · AGB (Links hier einfügen)</p>
+</footer>
+
+<aside class="drawer" id="drawer" aria-label="Warenkorb">
+  <header><h2>Warenkorb</h2><button class="cartbtn" id="closeCart">Schließen</button></header>
+  <div id="items"></div>
+  <div class="total"><span>Summe</span><span id="sum">0,00 €</span></div>
+  <button class="btn" id="checkout">Zur Kasse</button>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+let GAMES=["Alle"],P=[],q="",sortBy="neu";
+const $=s=>document.querySelector(s);
+const fmt=n=>n.toFixed(2).replace(".",",")+" €";
+let cart=[],cur="Alle";
+
+function renderTabs(){
+  $("#tabs").innerHTML=GAMES.map(g=>`<button class="tab" role="tab" aria-selected="${g===cur}" data-g="${g}">${g}</button>`).join("");
+}
+function renderGrid(){
+  let list=P.map((p,i)=>({p,i})).filter(({p})=>(cur==="Alle"||p[0]===cur)&&p[1].toLowerCase().includes(q));
+  if(sortBy==="auf")list.sort((a,b)=>a.p[4]-b.p[4]);if(sortBy==="ab")list.sort((a,b)=>b.p[4]-a.p[4]);
+  if(!list.length){$("#grid").innerHTML='<p class="emptyshop">Keine Produkte gefunden. Der Shop-Betreiber kann Produkte im Admin-Bereich hinzufügen.</p>';return}
+  $("#grid").innerHTML=list.map(({p,i},k)=>`
+  <article class="card" style="animation-delay:${k*50}ms">
+    <span class="badge ${p[5]?"upd":""}">${p[5]?"Update":"Aktiv"}</span>
+    <div><div class="game">${p[0]}</div><h3>${p[1]}</h3></div>
+    <p style="margin:0;color:var(--mute);font-size:14px">${p[2]}</p>
+    <ul>${p[3].map(f=>`<li>${f}</li>`).join("")}</ul>
+    <div class="price"><b>${fmt(p[4])}</b><button data-add="${i}">In den Warenkorb</button></div>
+  </article>`).join("");
+}
+function renderCart(){
+  $("#count").textContent=cart.length;
+  $("#items").innerHTML=cart.length?cart.map((i,k)=>`<div class="row"><span>${P[i][0]}: ${P[i][1]}</span><span>${fmt(P[i][4])} <button data-rm="${k}" aria-label="Entfernen">✕</button></span></div>`).join(""):`<p class="empty">Dein Warenkorb ist leer. Wähle ein Produkt im Shop.</p>`;
+  $("#sum").textContent=fmt(cart.reduce((s,i)=>s+P[i][4],0));
+}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2600)}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-g],[data-add],[data-rm]");
+  if(!t)return;
+  if(t.dataset.g){cur=t.dataset.g;renderTabs();renderGrid()}
+  if(t.dataset.add){cart.push(+t.dataset.add);renderCart();toast(P[t.dataset.add][1]+" hinzugefügt")}
+  if(t.dataset.rm){cart.splice(+t.dataset.rm,1);renderCart()}
+});
+$("#openCart").onclick=()=>$("#drawer").classList.add("open");
+$("#closeCart").onclick=()=>$("#drawer").classList.remove("open");
+$("#checkout").onclick=async()=>{if(!cart.length)return toast("Dein Warenkorb ist leer.");
+  const r=await fetch("/api/checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({keys:cart.map(i=>P[i][6])})});
+  const d=await r.json();d.url?location.href=d.url:toast(d.error||"Zahlung nicht möglich")};
+$("#q").oninput=e=>{q=e.target.value.toLowerCase();renderGrid()};
+$("#sort").onchange=e=>{sortBy=e.target.value;renderGrid()};
+
+// Headline reveal
+const h=$("#h1");h.innerHTML=h.textContent.split(" ").map((w,i)=>`<span style="animation-delay:${i*.12}s">${w}</span>`).join(" ");
+
+// Counters
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io.unobserve(en.target);const el=en.target,n=+el.dataset.n,t0=performance.now();
+  (function f(t){const k=Math.min((t-t0)/1400,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3))).toLocaleString("de-DE")+(n>=1000?"+":"");if(k<1)requestAnimationFrame(f)})(t0)}));
+document.querySelectorAll("[data-n]").forEach(el=>io.observe(el));
+
+// Hero background: drifting particles with connecting lines, reacts to the pointer
+const c=$("#fx"),x=c.getContext("2d");let W,H,pts=[],m={x:-999,y:-999};
+function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;pts=Array.from({length:Math.min(90,W/14)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}))}
+addEventListener("resize",size);size();
+c.parentElement.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top});
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+(function loop(){
+  x.clearRect(0,0,W,H);
+  for(const p of pts){
+    p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    const dx=p.x-m.x,dy=p.y-m.y,d=Math.hypot(dx,dy);if(d<120){p.x+=dx/d*1.5;p.y+=dy/d*1.5}
+    x.fillStyle="rgba(139,92,246,.8)";x.beginPath();x.arc(p.x,p.y,1.8,0,6.3);x.fill();
+  }
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<130){x.strokeStyle=`rgba(34,211,238,${.25*(1-d/130)})`;x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}
+  }
+  if(!still)requestAnimationFrame(loop)
+})();
+
+async function init(){
+  try{const r=await (await fetch("/api/products")).json();
+    P=r.map(p=>[p.game,p.name,p.description||"",[p.files+" Datei(en)","Sofort-Download"],p.price,0,p.key]);
+    GAMES=["Alle",...new Set(r.map(p=>p.game))];
+    const c=await (await fetch("/api/config")).json();if(c.discord){const a=$("#dc");a.href=c.discord;a.hidden=false}
+  }catch{}
+  renderTabs();renderGrid();renderCart()}
+init();
+</script>
+</body>
+</html>
